@@ -11,7 +11,7 @@ from google.analytics.data_v1beta.types import (
     RunReportRequest,
 )
 
-#Fetch Subaru data from GA4
+#Fetch **** data from GA4
 def fetch_data_ga4(property_id, input_start_date, input_end_date):
 
     client = BetaAnalyticsDataClient()
@@ -30,7 +30,7 @@ def fetch_data_ga4(property_id, input_start_date, input_end_date):
     response = client.run_report(request)
     return response
 
-#Create table out of Subaru data
+#Create table out of **** data
 def dataFrame(response):
     output = []
     print("Report result:")
@@ -51,7 +51,7 @@ def sql_connect(table,server,db):
 	cursor = cnxn.cursor()
 	# Insert Dataframe into SQL Server:
 	for index, row in table.iterrows():
-		cursor.execute("INSERT INTO [analyticssql01].[Test].[Subaru].[ga4_qr_codes] (Date,Page_title,Device_brand,Country,State,City,Views) values(?,?,?,?,?,?,?)", row.Date, row.Page_title, row.Device_brand, row.Country, row.State, row.City, row.Views)
+		cursor.execute("INSERT INTO [****].[Test].[****].[ga4_qr_codes] (Date,Page_title,Device_brand,Country,State,City,Views) values(?,?,?,?,?,?,?)", row.Date, row.Page_title, row.Device_brand, row.Country, row.State, row.City, row.Views)
 	cnxn.commit()
 	cursor.close()
 
@@ -79,20 +79,20 @@ def main():
     db_server=db_info["SERVER"]
     db=db_info["DATABASE"]
 
-    #Initialize Subaru GA4 json file credentials
-    logging.info("Initializing Subaru GA4 credentials...")
+    #Initialize **** GA4 json file credentials
+    logging.info("Initializing **** GA4 credentials...")
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = file_name
-    logging.info("Initializing Subaru GA4 credentials done.")
+    logging.info("Initializing **** GA4 credentials done.")
 
-    #Fetch Subaru data from GA4
-    logging.info("Fetching Subaru data from GA4...")
+    #Fetch **** data from GA4
+    logging.info("Fetching **** data from GA4...")
     response_api = fetch_data_ga4(property_id,start_date,end_date)
-    logging.info("Fetching Subaru data complete.")
+    logging.info("Fetching **** data complete.")
 
-    #Create table out of Subaru data
-    logging.info("Creating Subaru dataFrame...")
+    #Create table out of **** data
+    logging.info("Creating **** dataFrame...")
     dataFrame_table = dataFrame(response_api)
-    logging.info("Created Subaru dataFrame.")
+    logging.info("Created **** dataFrame.")
 
 	#Connect to SQL Server and Load dataFrame to SQL Server table
     logging.info("Creating and  loading dataFrame to SQL table...")
